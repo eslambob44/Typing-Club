@@ -1,0 +1,10 @@
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.csproj.AssemblyReference.cache
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing_Club.frmMain.resources
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing_Club.Properties.Resources.resources
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.csproj.GenerateResource.cache
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.csproj.CoreCompileInputs.cache
+D:\programmin\first jorney\Typing Club\bin\Debug\Typing Club.exe.config
+D:\programmin\first jorney\Typing Club\bin\Debug\Typing Club.exe
+D:\programmin\first jorney\Typing Club\bin\Debug\Typing Club.pdb
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.exe
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.pdb
