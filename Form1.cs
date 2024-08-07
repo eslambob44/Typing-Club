@@ -23,7 +23,7 @@ namespace Typing_Club
             public int WrongWords;
             public int TimeTakenToCompleteQuateInSeconds;
             public float NumberOfLettersPerSeconds;
-            public int Accuracy;
+            public float Accuracy;
             public int IndexOfLetterThatWillWritten;
 
         };
@@ -208,6 +208,107 @@ namespace Typing_Club
             }
         }
 
+        Button GetEnterdKey(Keys EnterdKey)
+        {
+            switch (EnterdKey)
+            {
+                case Keys.Enter:
+                    return btnEnter;
+                case Keys.Back:
+                    return btnBackSpace;
+                case Keys.LShiftKey:
+                case Keys.RShiftKey:
+                case Keys.ShiftKey:
+                    return btnLeftShift;
+                case Keys.CapsLock:
+                    return btnCapsLock;
+                case Keys.Tab:
+                    return btnTab;
+                case Keys.Q:
+                    return btnQ;
+                case Keys.W:
+                    return btnW;
+                case Keys.E:
+                    return btnE;
+                case Keys.R:
+                    return btnR;
+                case Keys.T:
+                    return btnT;
+                case Keys.Y:
+                    return btnY;
+                case Keys.U:
+                    return btnU;
+                case Keys.I:
+                    return btnI;
+                case Keys.O:
+                    return btnO;
+                case Keys.P:
+                    return btnP;
+                case Keys.OemOpenBrackets:
+                    return btnOpenSquareBracket;
+                case Keys.OemCloseBrackets:
+                    return btnCloseSquareBracket;
+                case Keys.A:
+                    return btnA;
+                case Keys.S:
+                    return btnS;
+                case Keys.D:
+                    return btnD;
+                case Keys.F:
+                    return btnF;
+                case Keys.G:
+                    return btnG;
+                case Keys.H:
+                    return btnH;
+                case Keys.J:
+                    return btnJ;
+                case Keys.K:
+                    return btnK;
+                case Keys.L:
+                    return btnL;
+                case Keys.OemSemicolon:
+                    return btnSemicolon;
+                case Keys.OemQuotes:
+                    return btnSingleQuatetion;
+                case Keys.Z:
+                    return btnZ;
+                case Keys.X:
+                    return btnX;
+                case Keys.C:
+                    return btnC;
+                case Keys.V:
+                    return btnV;
+                case Keys.B:
+                    return btnB;
+                case Keys.N:
+                    return btnN;
+                case Keys.M:
+                    return btnM;
+                case Keys.OemPeriod:
+                    return btnFullStop;
+                case Keys.Oemcomma:
+                    return btnComma;
+                case Keys.OemQuestion:
+                    return btnForwardSlash;
+                case Keys.Space:
+                    return btnSpace;
+                default:
+                    return null;
+
+
+            }
+        }
+
+        void ChangeLetterKeyToEntered(Button btnLetter)
+        {
+            btnLetter.BackColor = Color.DarkGray;
+        }
+
+        void ChangeLetterKeyToReleased(Button btnLetter)
+        {
+            btnLetter.BackColor=panel1.BackColor;
+        }
+
         private void rtxtTyping_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -224,14 +325,22 @@ namespace Typing_Club
                     DecreaseCorrectOrWrongTimesInStructAfterRemoveLetter();
                     ChangeLetterFontAndColor(GameResult.IndexOfLetterThatWillWritten, enLetterStatus.Waiting);
                 }
-                
+            }
+
+            if(btnStart.Tag.ToString()!="0")
+            {
+                Button btnEnterdKey = GetEnterdKey(e.KeyCode);
+                if (btnEnterdKey != null)
+                {
+                    ChangeLetterKeyToEntered(btnEnterdKey);
+                }
             }
             
         }
 
         void EndGame()
         {
-            GameResult.Accuracy = (int)(((float)GameResult.CorrectWords / GameResult.NumberOfWords) * 100);
+            GameResult.Accuracy = (((float)GameResult.CorrectWords / GameResult.NumberOfWords) * 100);
             GameResult.NumberOfLettersPerSeconds = ((float)GameResult.NumberOfWords / GameResult.TimeTakenToCompleteQuateInSeconds);
             timerCountTime.Enabled = false;
         }
@@ -278,6 +387,42 @@ namespace Typing_Club
                 ShowResult();
                 ResetGame();
             }
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                TextBoxBase txt = (TextBoxBase)cmsTxt.SourceControl;
+                txt.Font = fontDialog1.Font;
+            }
+        }
+
+        private void fontDialog1_Apply(object sender, EventArgs e)
+        {
+            RichTextBox txt = (RichTextBox)cmsTxt.SourceControl;
+            txt.Font=fontDialog1.Font;
+           
+            
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                RichTextBox txt = (RichTextBox)cmsTxt.SourceControl;
+                txt.ForeColor = colorDialog1.Color;
+            }
+        }
+
+        private void rtxtTyping_KeyUp(object sender, KeyEventArgs e)
+        {
+            Button btnEnterdKey = GetEnterdKey(e.KeyCode);
+            if(btnEnterdKey != null)
+            {
+                ChangeLetterKeyToReleased(btnEnterdKey);
+            }
+            
         }
     }
 }
