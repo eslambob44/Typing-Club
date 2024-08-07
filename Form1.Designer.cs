@@ -35,9 +35,11 @@
             this.btnNewQuate = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.timerCountTime = new System.Windows.Forms.Timer(this.components);
             this.rtxtTyping = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblRatioWordsPerQuateLength = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbQuateLength
@@ -47,7 +49,7 @@
             this.cbQuateLength.Location = new System.Drawing.Point(649, 24);
             this.cbQuateLength.Name = "cbQuateLength";
             this.cbQuateLength.Size = new System.Drawing.Size(166, 33);
-            this.cbQuateLength.TabIndex = 1;
+            this.cbQuateLength.TabIndex = 0;
             this.cbQuateLength.SelectedIndexChanged += new System.EventHandler(this.cbQuateLength_SelectedIndexChanged);
             // 
             // label1
@@ -72,14 +74,15 @@
             // 
             // btnNewQuate
             // 
+            this.btnNewQuate.BackColor = System.Drawing.Color.Gainsboro;
             this.btnNewQuate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnNewQuate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewQuate.Location = new System.Drawing.Point(127, 24);
             this.btnNewQuate.Name = "btnNewQuate";
             this.btnNewQuate.Size = new System.Drawing.Size(145, 33);
-            this.btnNewQuate.TabIndex = 4;
+            this.btnNewQuate.TabIndex = 1;
             this.btnNewQuate.Text = "New Quate";
-            this.btnNewQuate.UseVisualStyleBackColor = true;
+            this.btnNewQuate.UseVisualStyleBackColor = false;
             this.btnNewQuate.Click += new System.EventHandler(this.btnNewQuate_Click);
             // 
             // lblTime
@@ -102,30 +105,55 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Timer";
             // 
-            // button2
+            // btnStart
             // 
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(415, 435);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 33);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Start";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Location = new System.Drawing.Point(415, 435);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(145, 33);
+            this.btnStart.TabIndex = 2;
+            this.btnStart.Tag = "0";
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // timerCountTime
             // 
             this.timerCountTime.Interval = 1000;
             this.timerCountTime.Tick += new System.EventHandler(this.timerCountTime_Tick);
             // 
-            // txtTyping
+            // rtxtTyping
             // 
             this.rtxtTyping.Location = new System.Drawing.Point(41, 83);
             this.rtxtTyping.Name = "rtxtTyping";
+            this.rtxtTyping.ReadOnly = true;
             this.rtxtTyping.Size = new System.Drawing.Size(906, 309);
             this.rtxtTyping.TabIndex = 8;
+            this.rtxtTyping.TabStop = false;
             this.rtxtTyping.Text = "";
+            this.rtxtTyping.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtxtTyping_KeyDown);
+            this.rtxtTyping.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtxtTyping_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(506, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(137, 25);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Quate Length:";
+            // 
+            // lblRatioWordsPerQuateLength
+            // 
+            this.lblRatioWordsPerQuateLength.AutoSize = true;
+            this.lblRatioWordsPerQuateLength.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblRatioWordsPerQuateLength.Location = new System.Drawing.Point(469, 487);
+            this.lblRatioWordsPerQuateLength.Name = "lblRatioWordsPerQuateLength";
+            this.lblRatioWordsPerQuateLength.Size = new System.Drawing.Size(40, 25);
+            this.lblRatioWordsPerQuateLength.TabIndex = 10;
+            this.lblRatioWordsPerQuateLength.Text = "0/0";
+            this.lblRatioWordsPerQuateLength.Visible = false;
             // 
             // frmMain
             // 
@@ -133,8 +161,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(981, 537);
+            this.Controls.Add(this.lblRatioWordsPerQuateLength);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.rtxtTyping);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnNewQuate);
@@ -159,9 +189,11 @@
         private System.Windows.Forms.Button btnNewQuate;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Timer timerCountTime;
         private System.Windows.Forms.RichTextBox rtxtTyping;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRatioWordsPerQuateLength;
     }
 }
 
