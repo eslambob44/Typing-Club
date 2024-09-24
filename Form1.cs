@@ -22,8 +22,8 @@ namespace Typing_Club
             public int CorrectWords;
             public int WrongWords;
             public int TimeTakenToCompleteQuateInSeconds;
-            public float NumberOfLettersPerSeconds;
-            public float Accuracy;
+            public float NumberOfLettersPerSecond;
+            public int Accuracy;
             public int IndexOfLetterThatWillWritten;
 
         };
@@ -35,7 +35,7 @@ namespace Typing_Club
             result.CorrectWords = 0;
             result.WrongWords = 0;
             result.TimeTakenToCompleteQuateInSeconds = 0;
-            result.NumberOfLettersPerSeconds = 0;
+            result.NumberOfLettersPerSecond = 0;
             result.IndexOfLetterThatWillWritten = 0;
             return result;
         }
@@ -340,17 +340,16 @@ namespace Typing_Club
 
         void EndGame()
         {
-            GameResult.Accuracy = (((float)GameResult.CorrectWords / GameResult.NumberOfWords) * 100);
-            GameResult.NumberOfLettersPerSeconds = ((float)GameResult.NumberOfWords / GameResult.TimeTakenToCompleteQuateInSeconds);
+            GameResult.Accuracy = (int)(((float)GameResult.CorrectWords / GameResult.NumberOfWords) * 100);
+            GameResult.NumberOfLettersPerSecond = ((float)GameResult.NumberOfWords / GameResult.TimeTakenToCompleteQuateInSeconds);
             timerCountTime.Enabled = false;
+            ChangeLetterKeyToReleased(btnFullStop);
         }
 
         void ShowResult()
         {
-            string Line = "";
-            Line += $"Accuracy: {GameResult.Accuracy}%" + Environment.NewLine;
-            Line += $"Letter Per Second: {GameResult.NumberOfLettersPerSeconds}";
-            MessageBox.Show(Line,"Game Result");
+            frmShowResult frm = new frmShowResult(GameResult.Accuracy,GameResult.NumberOfLettersPerSecond);
+            frm.ShowDialog();
         }
 
         private void rtxtTyping_KeyPress(object sender, KeyPressEventArgs e)
@@ -422,6 +421,16 @@ namespace Typing_Club
             {
                 ChangeLetterKeyToReleased(btnEnterdKey);
             }
+            
+        }
+
+        private void cbQuate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+                if (cbQuateLength.SelectedIndex == -1) return;
+                Quates = GetQuatesByDifficultyLvl((enQuateLvl)cbQuateLength.SelectedIndex);
+                rtxtTyping.Text = GetQuate();
+                lblNumberOfQuates.Text = (Quates.IndexOf(rtxtTyping.Text) + 1) + "/" + Quates.Count;
             
         }
     }

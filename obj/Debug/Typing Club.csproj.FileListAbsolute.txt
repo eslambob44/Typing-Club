@@ -8,3 +8,6 @@ D:\programmin\first jorney\Typing Club\bin\Debug\Typing Club.exe
 D:\programmin\first jorney\Typing Club\bin\Debug\Typing Club.pdb
 D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.exe
 D:\programmin\first jorney\Typing Club\obj\Debug\Typing Club.pdb
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing_Club.frmShowResult.resources
+D:\programmin\first jorney\Typing Club\bin\Debug\Guna.UI2.dll
+D:\programmin\first jorney\Typing Club\obj\Debug\Typing C.131C9745.Up2Date
